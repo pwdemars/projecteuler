@@ -11,16 +11,26 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 import numpy as np 
 
-limit = 100
+# Initialise x, a boolean array of length 1000
+limit = 1000 
 x = np.zeros(limit, dtype=bool)
 
+# Set all multiples of 3 in x to true
 i = 3
 while i < limit:
     x[i] = True
     i+=3
     
+# Set all multiples of 5 in x to true
 i = 5
 while i < limit:
     x[i] = True
     i+=5
-    
+
+# Get indices set to true 
+t = np.where(x)
+
+# Sum up the indices 
+ans = np.sum(t)
+
+print("Answer: {}".format(ans))
