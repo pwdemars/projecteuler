@@ -1,33 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Mar 24 18:08:47 2020
+Project Euler 75 
 
-@author: patrickdemars
+TODO: ensure that b < c 
+
+Approach: 
+    1. Create arrays a_arr and b_arr of dimension (limit/2, limit/4) with np.indices. 
+    2. Fill the top right diagonals of a_arr and b_arr with nans. This assures
+    that b > a 
+    3. Square the two arrays and add them to give c_sq_arr
+    4. Square root the result to produce c_arr
+    5. Apply modulo 1 to c_arr (check if integer) to get c_mod
+    6. The index of places where c_mod == 0 give a and b, and c_arr[a,b] gives 
+    the values for c. 
+
 """
 
 import numpy as np
 import time
     
-limit = 20000
+limit = 10000
+s0 = time.time()
 s = time.time()
 
-a_arr = np.ones((int(limit/2)-1, int(limit/2)-1))    
-a_arr = a_arr * np.arange(1, int(limit/2))
+a_arr, b_arr = np.add(np.indices((int(limit/2), int(limit/4)), dtype=float), 1)
 
-print("Init a array: {:.2f}s".format(time.time()-s))
-s = time.time()
+for i in range(1, a_arr.shape[1]):
+    np.fill_diagonal(a_arr[:,i:], np.nan)
+    np.fill_diagonal(b_arr[:,i:], np.nan)
 
-b_arr = np.copy(a_arr).T
-
-print("Init b array: {:.2f}s".format(time.time()-s))
-s = time.time()
-
-w = a_arr.shape[1]
-a_arr = a_arr[:,:int(w/2) - w%2]
-b_arr = b_arr[:,:int(w/2) - w%2]
-
-print("Truncate arrays: {:.2f}s".format(time.time()-s))
+print("Fill diagonals: {:.2f}s".format(time.time()-s))
 s = time.time()
 
 c_sq_arr = np.square(a_arr) + np.square(b_arr)
@@ -48,10 +51,13 @@ s = time.time()
 ans = np.where(c_mod == 0)
 c = c_arr[ans]
 ans = np.add(ans, 1)
-a = ans[0]
-b = ans[1]
+a = ans[1]
+b = ans[0]
 
-print("Get answer: {:.2f}s".format(time.time()-s))
+print("Get a's, b's and c's: {:.2f}s".format(time.time()-s))
 
 ls = a + b + c 
-np.max(ls)
+
+print("TOTAL TIME: {:.2f}s".format(time.time()-s0))
+# TODO: remove duplicates
+# TODO: count ls 
