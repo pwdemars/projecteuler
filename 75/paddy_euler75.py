@@ -3,7 +3,7 @@
 """
 Project Euler 75 
 
-TODO: ensure that b < c 
+TODO: ensure that a + b + c <= l 
 
 Approach: 
     1. Create arrays a_arr and b_arr of dimension (limit/2, limit/4) with np.indices. 
