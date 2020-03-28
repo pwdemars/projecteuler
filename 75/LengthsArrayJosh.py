@@ -14,23 +14,13 @@ t0 = time.time()
 
 L = 1000
 
-#limits = numpy.array([[1 if y<x and y+x+2 < 2*L/3 else 0 for y in numpy.arange(L)] for x in numpy.arange(L)])
-
 Lengths = numpy.zeros(L+1, dtype = numpy.int8) 
 
 side_squared = numpy.array([x for x in range(1,L+1)])**2
 
 cees = numpy.array([[((side_squared[a] +  side_squared[b])**0.5) if b<a and a+b+2 < 2*L/3 else 0 for b in range(int(L))] for a in range(L)])
 
-#side_sum = numpy.array([side_squared[y] +  side_squared[:] for y in numpy.arange(int(L))])
-
-#side_sum *= limits
-
-#cees = side_sum**0.5 
-
 cees *= (cees % 1 == 0.0)
-
-
 
 count = 0
 for a in range(L):

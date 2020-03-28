@@ -11,7 +11,7 @@ import numpy
 import time 
 t0 = time.time()
 
-L = 1000
+L = 10000
 
 Lengths = numpy.zeros(L+1, dtype = numpy.int8) 
 

@@ -11,7 +11,8 @@ import numpy
 import time
 t0 = time.time()
 A = 3
-L = 10000
+
+L = 100
 
 Lengths = numpy.zeros(L, dtype = numpy.int8) 
 
@@ -28,6 +29,8 @@ while A < L/2:
    
 
 print(numpy.count_nonzero(Lengths == 1))
+
+print(Lengths)
 
 t4 = time.time()
 print(t4-t0)
