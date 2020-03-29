@@ -20,11 +20,14 @@ Approach:
 import numpy as np
 import time
     
-limit = 10000
+limit = 40000
 s0 = time.time()
 s = time.time()
 
 a_arr, b_arr = np.add(np.indices((int(limit/2), int(limit/4)), dtype=float), 1)
+
+print("Initialised arrays: {:.2f}s".format(time.time()-s))
+s = time.time()
 
 for i in range(1, a_arr.shape[1]):
     np.fill_diagonal(a_arr[:,i:], np.nan)
