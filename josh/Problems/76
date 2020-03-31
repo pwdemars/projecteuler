@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 27 11:47:11 2020
+
+@author: joshuajacob
+"""
+import time
+t0 = time.time()
+n = 10
+
+
+
+count = 1
+
+solutions = [[] for x in range(n)]
+
+while count < n:
+    if count <= n/2:
+        solutions[-count] += [[count]]
+    m = 1
+    while m < count:
+        solutions[-count] += [x + [m] for x in solutions[-count+m] if min(x) >= m and max(x) <= n-count]
+        m += 1
+        
+    count += 1
+
+solutions = [[[a]+y for y in solutions[a]] for a in range(n)]
+
+print(1+sum(len(x) for x in solutions))
+t1 = time.time()
+print(t1-t0)
